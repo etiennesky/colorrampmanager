@@ -33,7 +33,7 @@ PLUGINNAME = colorrampmanager
 
 PY_FILES = colorrampmanager.py colorrampmanagerdialog.py __init__.py
 
-EXTRAS = icon.png 
+EXTRAS = icon.png cpt_city_update.py
 
 UI_FILES = ui_colorrampmanager.py
 
@@ -57,14 +57,15 @@ compile: $(UI_FILES) $(RESOURCE_FILES)
 # The deploy  target only works on unix like operating system where
 # the Python plugin directory is located at:
 # $HOME/.qgis/python/plugins
-deploy: compile doc transcompile
+#deploy: compile doc transcompile
+deploy: compile transcompile
 	mkdir -p $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -vf $(PY_FILES) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -vf $(UI_FILES) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -vf $(RESOURCE_FILES) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -vf $(EXTRAS) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
 	cp -vfr i18n $(HOME)/.qgis/python/plugins/$(PLUGINNAME)
-	cp -vfr $(HELP) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)/help
+	#cp -vfr $(HELP) $(HOME)/.qgis/python/plugins/$(PLUGINNAME)/help
 
 # The dclean target removes compiled python files from plugin directory
 # also delets any .svn entry

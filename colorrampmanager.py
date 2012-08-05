@@ -22,19 +22,43 @@
 # Import the PyQt and QGIS libraries
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+import os
+import time
+from datetime import date
 from qgis.core import *
+
 # Initialize Qt resources from file resources.py
 import resources_rc
+
 # Import the code for the dialog
 from colorrampmanagerdialog import ColorRampManagerDialog
 
-class ColorRampManager:
+# Import update script
+from cpt_city_update import cpt_city_update
+
+#misc functions
+def info(args) :
+    if verbose :
+        print args
+
+def ensure_directory(path) :
+    try:
+        os.makedirs(path)
+    except OSError, e:
+        if os.path.isdir(path):
+            pass
+        else:
+            raise
+
+class ColorRampManager(QObject):
 
     def __init__(self, iface):
+        QObject.__init__(self)
         # Save reference to the QGIS interface
         self.iface = iface
         # Create the dialog and keep reference
         self.dlg = ColorRampManagerDialog()
+        
         # initialize plugin directory
         self.plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/colorrampmanager"
         # initialize locale
@@ -50,7 +74,9 @@ class ColorRampManager:
 
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
-   
+
+        # check for updates in background - every 7 days, optional
+        ret = self.checkUpdateAuto()
 
     def initGui(self):
         # Create action that will start plugin configuration
@@ -58,6 +84,7 @@ class ColorRampManager:
             u"Color Ramp Manager", self.iface.mainWindow())
         # connect the action to the run method
         QObject.connect(self.action, SIGNAL("triggered()"), self.run)
+        QObject.connect(self.dlg.pbtnUpdateCheck, SIGNAL('clicked()'), self.on_pbtnUpdateCheck_clicked)
 
         # Add toolbar button and menu item
         self.iface.addToolBarIcon(self.action)
@@ -71,11 +98,138 @@ class ColorRampManager:
     # run method that performs all the real work
     def run(self):
         # show the dialog
+        self.dlg.updateUI()
         self.dlg.show()
         # Run the dialog event loop
         result = self.dlg.exec_()
         # See if OK was pressed
         if result == 1:
-            # do something useful (delete the line containing pass and
-            # substitute with your code)
-            pass
+            self.dlg.apply()
+
+    def getInstallDir(self):
+        #return a python string
+        installDir = str(self.dlg.installDir)
+        if self.dlg.rbtnDirCustom.isChecked():
+            installDir = str(self.dlg.leDirCustom.text())
+        if installDir is None or installDir=='':
+            s = QSettings()
+            installDir = str(s.value('CptCity/installDir', \
+                                         QgsApplication.qgisSettingsDirPath()).toString())
+        return installDir
+    
+    def checkUpdateAuto(self):
+        #default check on start if last check was 7+ days ago
+        s = QSettings()
+        daysCheck = s.value('CptCity/updateCheckAuto',0).toInt()[0]
+        if daysCheck <= 0:
+            return
+        prevCheckStr = str(s.value('CptCity/updateChecked', '').toString())
+        check = False
+        if prevCheckStr == '':
+            check = True
+        else:
+            prevCheckDate = date( int(prevCheckStr[0:4]), int(prevCheckStr[5:7]), \
+                                      int(prevCheckStr[8:10]) )
+            todayDate = date.today()
+            diff = abs(todayDate - prevCheckDate).days
+            if diff >= daysCheck:
+                check = True
+        if check:
+            message = self.checkUpdate('',False,'')
+            return message
+        return ''
+                
+    def on_pbtnUpdateCheck_clicked(self):
+        self.checkUpdate('',True,self.dlg.windowTitle())
+
+    # returns '' if no update available, else returns a descriptive string
+    def checkUpdate(self,installDir='',gui=False,title=''):
+        if installDir is None or installDir=='':
+            installDir = self.getInstallDir()
+
+        #message = self.checkPermissions(installDir,gui,title)
+        #if message != '':
+        #    return message
+
+        # if we have an available update, no need to check
+        s = QSettings()
+        if str(s.value('CptCity/updateAvailable', '').toString()) != '':
+            (ret,version) = (True,str(s.value('CptCity/updateAvailable', '').toString()))
+        else:
+            # set override cursor
+            if gui:
+                QApplication.setOverrideCursor( Qt.WaitCursor )      
+            # fetch new version
+            (ret,version) = cpt_city_update( installDir, False )
+            if gui:
+                QApplication.restoreOverrideCursor()
+            s = QSettings()
+            # update settings
+            s.setValue('CptCity/updateChecked', QString(date.today().isoformat()))
+            if ret:
+                s.setValue('CptCity/updateAvailable', str(version))
+
+        # we have an update, act on it
+        if ret:
+            #TODO print new version info and/or log, when not running from gui
+            if gui:
+                result = QMessageBox.information(None, title, \
+                                                     self.tr('Newer version (%1) is available, download?').arg( version ), \
+                                                     QMessageBox.Yes | QMessageBox.No)
+                if result == QMessageBox.No:
+                    return ''
+                else:
+                    return self.installUpdate(installDir,gui,title)
+            else:
+                return self.tr('New cpt-city version (%1) is available').arg( version )
+        else:
+            if gui:
+                QMessageBox.information(None, title, self.tr('Up to date (version %1)').arg(version), QMessageBox.Close)
+                self.dlg.pbtnUpdateCheck.setEnabled( False )
+            else:
+                return ''
+        return ''
+
+    # returns a descriptive string
+    def installUpdate(self,installDir='',gui=False,title=''):
+        if installDir is None or installDir=='':
+            installDir = self.getInstallDir()
+        message = self.checkPermissions(installDir,gui,title)
+        if message != '':
+            return message
+        if gui:
+            QApplication.setOverrideCursor( Qt.WaitCursor )
+        (ret,version) = cpt_city_update( installDir, True )
+        if gui:
+            QApplication.restoreOverrideCursor()
+        if ret:       
+            s = QSettings()
+            s.setValue('CptCity/updateChecked', QString(date.today().isoformat()))
+            s.setValue('CptCity/updateAvailable', QString(''))
+            message = self.tr('Version %1 installed').arg(version)
+            if gui:
+                QMessageBox.information(None, self.dlg.windowTitle(), message, QMessageBox.Close)
+                self.dlg.pbtnUpdateCheck.setEnabled( False )
+            return message
+        else:
+            message = self.tr('Error downloading or applying update')
+            if gui:
+                QMessageBox.warning(None, self.dlg.windowTitle(), message, QMessageBox.Close)
+            return message
+            
+    # returns ''if permissions ok, else returns a descriptive string
+    def checkPermissions(self,installDir,gui=False,title=''):
+        if installDir is None or installDir=='':
+            message = self.tr('Please select a directory')
+            if gui:
+                QMessageBox.warning(None, title, message, QMessageBox.Close)
+            return message
+        if not os.access(installDir, os.W_OK):
+            message = self.tr('Cannot write to directory %1').arg(installDir)
+            if gui:
+                QMessageBox.warning(None, title, message, QMessageBox.Close)
+            return message
+        return ''
+
+
+                     
