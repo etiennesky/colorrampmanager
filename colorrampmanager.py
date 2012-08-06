@@ -113,7 +113,7 @@ class ColorRampManager(QObject):
             installDir = str(self.dlg.leDirCustom.text())
         if installDir is None or installDir=='':
             s = QSettings()
-            installDir = str(s.value('CptCity/installDir', \
+            installDir = str(s.value('CptCity/BaseDir', \
                                          QgsApplication.qgisSettingsDirPath()).toString())
         return installDir
     
@@ -174,7 +174,7 @@ class ColorRampManager(QObject):
             #TODO print new version info and/or log, when not running from gui
             if gui:
                 result = QMessageBox.information(None, title, \
-                                                     self.tr('Newer version (%1) is available, download?').arg( version ), \
+                                                     self.tr('Version (%1) is available, download?').arg( version ), \
                                                      QMessageBox.Yes | QMessageBox.No)
                 if result == QMessageBox.No:
                     return ''

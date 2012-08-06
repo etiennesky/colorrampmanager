@@ -52,7 +52,7 @@ class ColorRampManagerDialog(QDialog, Ui_ColorRampManager):
 
         # set dir. labels
         s = QSettings()
-        self.installDir = s.value('CptCity/installDir', QgsApplication.qgisSettingsDirPath()).toString()
+        self.installDir = s.value('CptCity/baseDir', QgsApplication.qgisSettingsDirPath()).toString()
         dirSystem = '/usr'
         self.lblDirSystem.setText(dirSystem + '/share/')
         if dirSystem == QgsApplication.prefixPath():
@@ -90,7 +90,7 @@ class ColorRampManagerDialog(QDialog, Ui_ColorRampManager):
             installDir = self.leDirCustom.text()
         s = QSettings()
         if str(self.installDir) != '':
-            s.setValue('CptCity/installDir', self.installDir)
+            s.setValue('CptCity/baseDir', self.installDir)
         if self.cboxCheckUpdateAuto.isChecked():
             checkAuto=7
         else:
