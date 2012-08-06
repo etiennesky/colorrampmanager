@@ -19,14 +19,14 @@ version=0.1
 # Optional items:
 
 # Uncomment the following line and add your changelog entries:
-# changelog=
+changelog=initial version
 
 # tags are comma separated with spaces allowed
 tags=style
 
-homepage=home
-tracker=bug
-repository=repos
+homepage=http://hub.qgis.org/projects/colorrampmanager
+tracker=http://hub.qgis.org/projects/colorrampmanager/issues
+repository=https://github.com/etiennesky/colorrampmanager.git
 icon=icon.png
 # experimental flag
 experimental=True
