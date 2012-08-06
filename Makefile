@@ -33,7 +33,7 @@ PLUGINNAME = colorrampmanager
 
 PY_FILES = colorrampmanager.py colorrampmanagerdialog.py __init__.py
 
-EXTRAS = icon.png cpt_city_update.py
+EXTRAS = icon.png cpt_city_update.py metadata.txt
 
 UI_FILES = ui_colorrampmanager.py
 
