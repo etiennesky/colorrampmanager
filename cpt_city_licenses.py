@@ -1,4 +1,5 @@
 #! /usr/bin/python
+# run this script from a cpt-city directory
 
 # look for files with license that allows for redistribution
 # GPL, Apache, public domain 
@@ -13,11 +14,10 @@
 #    <text href="http://www.gnu.org/licenses/gpl-2.0.html"/>
 #  </license>
 
-import sys, os, errno, urllib, warnings, zipfile;
+import sys, os, errno, urllib, warnings
 from xml.etree.ElementTree import ElementTree
-#import xml.etree.ElementTree as et
-from optparse import OptionParser
 
+# definitions
 license_dict=dict()
 license_dict['gpl']=[]     #GPL
 license_dict['gplv2']=[]   #GPLv2
@@ -61,31 +61,27 @@ os       UK Open Government Licence
 ukmo     UK Open Government Licence
 wkp/encyclopedia Public domain due to age
 
-Exceptions (not allowed):
 
 not sure
 ds, esdb, 'esri', 'go2/button', 'go2/ipod', 'go2/webtwo'
 xkcd     ccnc
 
-need to validate:
-cc3 : 52
-ds/ ?
-
 need to add to doc/UI:
 - ColorBrewer acknowledgment
+-need to add gmt_sealand to selections
 """
 
-cpt_city_basedir = "%s/.qgis/cpt-city" % (os.environ['HOME'])
 
 count = 0
 count_miss = 0
 count_err = 0
+dirs_miss=[]
 
 print('')
-print('fulldirname ; distrib_flag ; license_flag ; license_details')
+print('fulldirname;distrib_flag;license_flag;license_details')
 
-dirs_miss=[]
-os.chdir(cpt_city_basedir)
+#cpt_city_basedir = "%s/.qgis/cpt-city" % (os.environ['HOME'])
+#os.chdir(cpt_city_basedir)
 for dirname, dirnames, filenames in os.walk('.'):
 
     dirnames.sort()
@@ -172,8 +168,6 @@ for dirname, dirnames, filenames in os.walk('.'):
             elif license_href == 'http://creativecommons.org/licenses/by-sa-nc/3.0/' :
                 license_tmp = 'ccnc'
 
-              #print(license_text)
-
         # decide if we can distribute it, based on license class 
         distribute_tmp = 'unsure'
         if license_tmp in licenses_dist_yes:
@@ -218,72 +212,15 @@ for key in distribute_dict.iterkeys():
     print(str(distribute_dict[key]))
 
 
-for val in distribute_dict['noncomm']:
-    filename=cpt_city_basedir+'/'+val+'/COPYING.xml'
-    print('=====')
-    print(filename)
-    try:
-        f = open(filename, 'r')
-        print f.read(),
-        f.close()
-    except IOError:
-        print "File " + filename + " does not exist."
+#for val in license_dict['cc3']:
+#    filename=cpt_city_basedir+'/'+val+'/COPYING.xml'
+#    print('=====')
+#    print(filename)
+#    try:
+#        f = open(filename, 'r')
+#        print f.read(),
+#        f.close()
+#    except IOError:
+#        print "File " + filename + " does not exist."
 
-"""
-for dir in * */* */*/* */*/*/* ; do
-    if [ -d $dir -a -f $dir/COPYING.xml ] ; then  
-        #echo $dir; 
-        license_url=`xmlstarlet el -v $dir/COPYING.xml  | grep copying/license/text`
-        #license_name=`xmlstarlet sel -t -v copying/license/informal $dir/COPYING.xml | sed 's/^ *//;s/ *$//'`
-        license_name=`xmlstarlet sel -t -v copying/license/informal $dir/COPYING.xml`
-        read  -rd '' license_name <<< "$license_name"
-        license=""
-       if [[ "${license_name}" != "" ]] ; then
-            license=${license}"["${license_name}"] "
-            if [[ "${license_name}" == "GPL" ]] ; then
-                license_gpl=${license_gpl}" "$dir
-            elif [[ "${license_name}" == "GPLv2" ]] ; then
-                license_gplv2=${license_gplv2}" "$dir
-            elif [[ "${license_name}" == "Apache-like" ]] ; then
-                license_apache=${license_apache}" "$dir
-            elif [[ "${license_name}" == "Apache-style" ]] ; then
-                license_apache=${license_apache}" "$dir
-            elif [[ "${license_name}" == "Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported" || "${license_name}" == "Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)" || "${license_name}" == "Creative commons attribution share-alike 3.0 unported" ]] ; then                              
-                license_cc3=${license_cc3}" "$dir
-            elif [[ "${license_name}" == "Public domain" || "${license_name}" == "BSD-like" ]] ; then
-                license_otherok=${license_otherok}" "$dir
-            # unsure
-            elif [[ "${license_name}" == "Credit requested" ||  "${license_name}" == "Free to use" ||  "${license_name}" == "Attribution required" || "${license_name}" == "Attribution and share-alike required" || "${license_name}" == "Link requested" ]] ; then
-                license_unsure=${license_unsure}" "$dir
-            else
-                license_none=${license_none}" "$dir
-            fi
-       else
-           license_none=${license_none}" "$dir
-       fi      
-       if [[ "${license_url}" != "" && "${license_url}" != "copying/license/text" ]] ; then
-#           echo ${#license1}
-           # extract url
-           license_url=${license_url:28:((${#license_url}-31))}
-           license=$license"["${license_url}"]"
-       else
-           license_url=""
-       fi
 
-       if [[ "${license}" != "" ]] ; then
-           echo $dir - $license
-       fi
-    fi 
-done
-
-echo "======================="
-
-echo GPL          : $license_gpl
-echo GPLv2        : $license_gplv2
-echo Apache-like  : $license_apache
-echo CC3          : $license_cc3
-echo other ok     : $license_otherok
-echo unsure       : $license_unsure
-echo none         : $license_none
-
-"""
