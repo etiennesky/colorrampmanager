@@ -113,9 +113,17 @@ class ColorRampManager(QObject):
             installDir = str(self.dlg.leDirCustom.text())
         if installDir is None or installDir=='':
             s = QSettings()
-            installDir = str(s.value('CptCity/BaseDir', \
-                                         QgsApplication.qgisSettingsDirPath()).toString())
+            installDir = str(s.value('CptCity/baseDir', \
+                                         QgsApplication.pkgDataPath() + "/resources" ).toString())
         return installDir
+    
+    def getPackageType(self):
+        #return a python string
+        packageType = str(self.dlg.packageType)
+        if packageType is None or packageType=='':
+            s = QSettings()
+            packageType = s.value('CptCity/archiveName', 'cpt-city-qgis-sel').toString()
+        return packageType
     
     def checkUpdateAuto(self):
         #default check on start if last check was 7+ days ago
@@ -160,7 +168,8 @@ class ColorRampManager(QObject):
             if gui:
                 QApplication.setOverrideCursor( Qt.WaitCursor )      
             # fetch new version
-            (ret,version) = cpt_city_update( installDir, False )
+            packageType = self.getPackageType()
+            (ret,version) = cpt_city_update( installDir, False, packageType )
             if gui:
                 QApplication.restoreOverrideCursor()
             s = QSettings()
@@ -168,13 +177,14 @@ class ColorRampManager(QObject):
             s.setValue('CptCity/updateChecked', QString(date.today().isoformat()))
             if ret:
                 s.setValue('CptCity/updateAvailable', str(version))
-
+            
+                
         # we have an update, act on it
         if ret:
             #TODO print new version info and/or log, when not running from gui
             if gui:
                 result = QMessageBox.information(None, title, \
-                                                     self.tr('Version (%1) is available, download?').arg( version ), \
+                                                     self.tr('Version (%1) is available, download and install?').arg( version ), \
                                                      QMessageBox.Yes | QMessageBox.No)
                 if result == QMessageBox.No:
                     return ''
@@ -182,12 +192,18 @@ class ColorRampManager(QObject):
                     return self.installUpdate(installDir,gui,title)
             else:
                 return self.tr('New cpt-city version (%1) is available').arg( version )
-        else:
+        elif version != 0:
             if gui:
                 QMessageBox.information(None, title, self.tr('Up to date (version %1)').arg(version), QMessageBox.Close)
                 self.dlg.pbtnUpdateCheck.setEnabled( False )
             else:
                 return ''
+        else:
+            message = self.tr('Error checking update')
+            if gui:
+                QMessageBox.warning(None, self.dlg.windowTitle(), message, QMessageBox.Close)
+            return message
+
         return ''
 
     # returns a descriptive string
@@ -199,7 +215,9 @@ class ColorRampManager(QObject):
             return message
         if gui:
             QApplication.setOverrideCursor( Qt.WaitCursor )
-        (ret,version) = cpt_city_update( installDir, True )
+        s = QSettings()
+        packageType = self.getPackageType()
+        (ret,version) = cpt_city_update( installDir, True, packageType )
         if gui:
             QApplication.restoreOverrideCursor()
         if ret:       
@@ -212,7 +230,7 @@ class ColorRampManager(QObject):
                 self.dlg.pbtnUpdateCheck.setEnabled( False )
             return message
         else:
-            message = self.tr('Error downloading or applying update')
+            message = self.tr('Error downloading or installing update, check console')
             if gui:
                 QMessageBox.warning(None, self.dlg.windowTitle(), message, QMessageBox.Close)
             return message

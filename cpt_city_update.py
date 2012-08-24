@@ -27,7 +27,7 @@ Changelog:
  ***************************************************************************/
 """
 
-import sys, os, errno, urllib, warnings, zipfile;
+import sys, os, errno, urllib, warnings, zipfile, shutil
 import xml.etree.ElementTree as et
 from optparse import OptionParser
 
@@ -36,7 +36,7 @@ from optparse import OptionParser
 #import qgis.utils
 
 ################################################################
-def cpt_city_update( datadir = None, install = True ):
+def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
 
     # you may want to configure these
 
@@ -50,13 +50,24 @@ def cpt_city_update( datadir = None, install = True ):
         qgisSettingsDir = None
     if qgisSettingsDir is None or qgisSettingsDir == '':
         qgisSettingsDir = "%s/.qgis" % (os.environ['HOME'])
-    cachedir = "%s/cache/cpt-city-update" % (qgisSettingsDir)
+    cachedir = "%s/cache/cpt-city" % (qgisSettingsDir)
     if datadir is None:
         datadir = "%s/" % (qgisSettingsDir)
-    verfile   = "%s/cpt-city/cpt-city.version" % (datadir)
+    verfile = "%s/%s/VERSION.xml" % (datadir,package)
 
     # this will need to be changed if/when the cpt-city site moves
-    starturl = "http://soliton.vm.bytemark.co.uk/pub/cpt-city/pkg"
+    if package == 'cpt-city':
+        starturl = "http://soliton.vm.bytemark.co.uk/pub/cpt-city/pkg"
+        pkgfile   = "package.xml"
+        selectionfile = "../views/index-static.xml"
+    elif package == 'cpt-city-qgis-sel':
+        #TODO change this before release!
+        starturl = "http://openclimgeo.org/cpt-city/pkg"
+        pkgfile   = "package-qgis-sel.xml"
+        selectionfile = "../views/index-static.xml"
+    else:
+        print('illegal value '+cpt-city+' for package argument')
+        return
 
     # if this file is integrated into another package
     # called "foo" then please change the UA string to 
@@ -66,7 +77,7 @@ def cpt_city_update( datadir = None, install = True ):
 
     # these you probably leave alone
 
-    pkgfile   = "package.xml"
+    #pkgfile   = "package.xml"
 
     # handle verbose
 
@@ -78,6 +89,7 @@ def cpt_city_update( datadir = None, install = True ):
 
     info("This is cpt-city-update")
     info('cachedir: '+cachedir+' datadir: '+datadir+' verfile: '+verfile)
+    info('starturl: '+starturl+' pkgfile: '+pkgfile)
 
     # ensure configuration/data dirs exist
 
@@ -94,7 +106,7 @@ def cpt_city_update( datadir = None, install = True ):
     ensure_directory(datadir)
 
     # create customised urllib opener class with the
-    # specfified user agent string
+    # specified user agent string
 
     class Opener(urllib.FancyURLopener, object):
         version = useragent
@@ -103,7 +115,13 @@ def cpt_city_update( datadir = None, install = True ):
 
     # try to open the package file
 
-    con = opener.open("%s/%s" % (starturl,pkgfile))
+    xmlurl = "%s/%s" % (starturl,pkgfile)
+    url = urllib.urlopen(xmlurl)
+    if url.getcode() == 404:
+        print('invalid url %s' % xmlurl)
+        return (False,0)
+
+    con = opener.open(xmlurl)
     assert con is not None, "Failed to connect to server"
 
     # get DOM from package file
@@ -123,10 +141,11 @@ def cpt_city_update( datadir = None, install = True ):
         print "-------------------------------------------------------"
 
     # get version from dom, compare it with current version
-    # we take care to treat the version numbers as major.minor
+    # we take care to treat the version numbers as major.minor<.release>
     # and not floats (version 1.02 is higher than version 1.1)
             
     vernew = dom.attrib['version']
+    info('vernew: '+str(vernew))
 
     def verparts(verstring) :
         parts = tuple(map(int,verstring.rsplit('.')))
@@ -136,16 +155,44 @@ def cpt_city_update( datadir = None, install = True ):
     # compare vernew and verold, if install=False then just notify new version
 
     def vernewer(a,b) :
-        return (a[0] > b[0]) or ((a[0] == b[0]) and (a[1] > b[1]))
+        #return (a[0] > b[0]) or ((a[0] == b[0]) and (a[1] > b[1]))
+        if a[0] > b[0]:
+            return True
+        if len(a) == 2:
+            return ((a[0] >= b[0]) and (a[1] > b[1]))
+        if len(a) == 3:
+            return ((a[0] >= b[0]) and (a[1] >= b[1]) and (a[2] > b[2]))
+        return False
         
     if os.path.exists(verfile) :
-        fd = open(verfile,'r')
-        verold = fd.readline().strip()
-        if vernewer(vernew,verold) :
+        #fd = open(verfile,'r')
+        #verold = fd.readline().strip()
+
+        tree = et.ElementTree('archive')
+        tree.parse(verfile)
+        if tree is None:
+            print("Failed to parse %s" % (verfile))
+            return (False,0)
+        node = tree.find('version')
+        if node is None:
+            print("Did not find version in %s" % (verfile))
+            return (False,0)
+        verold = node.text
+        info("verold: %s" % (verold))
+        # if vernew has 3 parts, make sure verold also
+        parts_new = tuple(map(int,vernew.rsplit('.')))
+        parts_old = tuple(map(int,verold.rsplit('.')))
+        if len(parts_new) == 3 and len(parts_old) == 2:
+            #verold_tmp = ( '%s.0' % verold )
+            parts_old = parts_old + (0,)
+        #else:
+        #    verold_tmp = verold
+        #if vernewer(vernew,verold_tmp) :
+        if vernewer(parts_new,parts_old) :
             info("newer version available (%s > %s)" % (vernew,verold))
             if not install:
                 info("not installing as per user request")
-                return(True)                                   
+                return(True,vernew)                                   
         else:
             info("up to date (version %s) in %s" % (verold,datadir))
             return(False,verold)                     
@@ -156,7 +203,7 @@ def cpt_city_update( datadir = None, install = True ):
         info("not installing as per user request")
         return(True,vernew)                        
 
-    # get the files (if we dont have them already)
+    # get the files (if we don't have them already)
 
     for gradtype in gradtypes :
 
@@ -168,10 +215,14 @@ def cpt_city_update( datadir = None, install = True ):
         if os.path.exists(gradpath) :
             info("found %s" % (gradfile))
         else:
-            info("fetching %s" % (gradfile))
+            info("fetching %s" % (gradurl))
+            url = urllib.urlopen(gradurl)
+            if url.getcode() == 404:
+                print('invalid url %s' % gradurl)
+                return (False,0)
             opener = Opener()
-            opener.retrieve(gradurl,gradpath)
-
+            (filename,msg) = opener.retrieve(gradurl,gradpath)
+            info('got %s - %s' % (filename,msg))
         # verify that the zipfile does not write any files
         # outside the directory into which is was unzipped
         #
@@ -180,8 +231,13 @@ def cpt_city_update( datadir = None, install = True ):
         # unzipped with sufficient privileges destroy the 
         # OS, replace /bin/sh by a rooted version, ...
             
-        zf = zipfile.ZipFile(gradpath,"r")
-
+        try:
+            zf = zipfile.ZipFile(gradpath,"r")
+        except zipfile.BadZipfile:
+            print('invalid zipfile %s' %(gradpath))
+            os.remove(gradpath)
+            return (False,0)
+            
         prefix = os.getcwd()
         lprefix = len(prefix)
 
@@ -189,17 +245,64 @@ def cpt_city_update( datadir = None, install = True ):
             abspath = os.path.abspath(path)
             assert abspath[:lprefix] == prefix, "suspect file %s" % (path)
 
+        # cleanup path
+        if os.path.exists(datadir+'/'+package):
+            print('removing '+datadir+'/'+package)
+            shutil.rmtree(datadir+'/'+package)
+        
         # unpack the files
         info("unzipping %s to directory %s" % (gradfile,datadir))
+        umask_old = os.umask( 0022 ) #set umask so files can be read by others
         zf.extractall(datadir)
+        os.umask( umask_old )
+
+        # fix permissions: dirs are 755, files are 644
+        for root, dirs, files in os.walk(datadir):
+            os.chmod(root,0755)
+            for f in files:
+                os.chmod(os.path.join(root,f),0644)
+
+
+    # get selection files
+
+    seldir =  "%s/%s/selections" % (datadir,package)
+    if not os.path.exists(seldir):
+        os.makedirs(seldir)
+
+    xmlurl = "%s/%s" % (starturl,selectionfile)
+    url = urllib.urlopen(xmlurl)
+    if url.getcode() == 404:
+        print('invalid url %s' % xmlurl)
+        return (False,0)
+
+    con = opener.open(xmlurl)
+    assert con is not None, "Failed to connect to server"
+    dom = et.parse(con).getroot()
+    assert dom is not None, "Failed to parse package file"
+    
+
+    opener = Opener()
+    for sel in dom.findall("selection"):
+        selfileurl = "%s/../views/%s.xml" % (starturl,sel.text)
+        selfile = "%s/%s.xml" % (seldir,sel.text)
+        info("fetching %s" % (selfileurl))
+        (filename,msg) = opener.retrieve(selfileurl,selfile)    
+
+    # get popular selections
+    popfiles = [ "totp-svg", "totp-cpt" ]
+    for sel in popfiles:
+        selfileurl = "%s/../views/%s.xml" % (starturl,sel)
+        selfile = "%s/%s.xml" % (seldir,sel)
+        info("fetching %s" % (selfileurl))
+        (filename,msg) = opener.retrieve(selfileurl,selfile)    
+    
 
     # done
 
     # save the new version number
-
-    fd = open(verfile,'w')
-    fd.write("%s\n" % (vernew))
-    fd.close()
+    #fd = open(verfile,'w')
+    #fd.write("%s\n" % (vernew))
+    #fd.close()
 
     # say goodbye
 

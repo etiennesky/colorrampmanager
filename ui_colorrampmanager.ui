@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>368</width>
-    <height>366</height>
+    <width>539</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,50 +37,110 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>cpt-city gradient files will be installed in
-cpt-city/ directory inside the chosen location</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="groupBoxPackage">
          <property name="title">
-          <string>Select install location</string>
+          <string>Package</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="3" column="0">
-           <widget class="QRadioButton" name="rbtnDirQgis">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="3" column="1">
+           <widget class="QRadioButton" name="rbtnPackageCptCity">
             <property name="text">
-             <string>Qgis root dir.</string>
+             <string>Full cpt-city package (~3MB)</string>
             </property>
             <attribute name="buttonGroup">
-             <string notr="true">buttonGroupDir</string>
+             <string notr="true">buttonGroupPackage</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QRadioButton" name="rbtnPackageBuiltin">
+            <property name="text">
+             <string>Use gradients that ship with qgis</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupPackage</string>
+            </attribute>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QRadioButton" name="rbtnPackageQgis">
+            <property name="text">
+             <string>QGIS selection - free to distribute (600kB)</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">buttonGroupPackage</string>
             </attribute>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QRadioButton" name="rbtnDirSystem">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>10</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="label_3">
             <property name="text">
-             <string>System directory</string>
+             <string>Select the color ramp package you which to use</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBoxDirectory">
+         <property name="title">
+          <string>Installation directory</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="3" column="1">
+           <widget class="QRadioButton" name="rbtnDirQgis">
+            <property name="text">
+             <string>QGIS directory</string>
             </property>
             <attribute name="buttonGroup">
              <string notr="true">buttonGroupDir</string>
             </attribute>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="4" column="1">
            <widget class="QRadioButton" name="rbtnDirUser">
             <property name="text">
-             <string>Qgis profile dir.</string>
+             <string>QGIS user dir.</string>
             </property>
             <attribute name="buttonGroup">
              <string notr="true">buttonGroupDir</string>
             </attribute>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="5" column="1">
            <widget class="QRadioButton" name="rbtnDirCustom">
             <property name="text">
              <string>Custom</string>
@@ -90,28 +150,21 @@ cpt-city/ directory inside the chosen location</string>
             </attribute>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="lblDirSystem">
-            <property name="text">
-             <string>&lt;system&gt;</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
+          <item row="4" column="2">
            <widget class="QLabel" name="lblDirUser">
             <property name="text">
              <string>&lt;user&gt;</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="3" column="2">
            <widget class="QLabel" name="lblDirQgis">
             <property name="text">
              <string>&lt;qgis&gt;</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="5" column="2">
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
              <widget class="QLineEdit" name="leDirCustom"/>
@@ -125,8 +178,97 @@ cpt-city/ directory inside the chosen location</string>
             </item>
            </layout>
           </item>
+          <item row="3" column="0">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>10</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0" colspan="3">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>cpt-city gradient files will be installed inside the chosen location</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Location</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Maximum</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>10</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="leLocation">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -150,14 +292,10 @@ cpt-city/ directory inside the chosen location</string>
            </property>
           </spacer>
          </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QCheckBox" name="cboxCheckUpdateAuto">
            <property name="text">
-            <string>Check for updates every 7 days</string>
+            <string>Check for update every 7 days</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -219,5 +357,6 @@ cpt-city/ directory inside the chosen location</string>
  </connections>
  <buttongroups>
   <buttongroup name="buttonGroupDir"/>
+  <buttongroup name="buttonGroupPackage"/>
  </buttongroups>
 </ui>

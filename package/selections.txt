@@ -1,5 +1,5 @@
 
-bath
+#bath
 gmt/GMT_ocean
 gmt/GMT_gebco
 jjg/dem/gebco-shelf
@@ -11,7 +11,7 @@ esri/hypsometry/bath/bath_112
 tp/tpsfhm
 xkcd/xkcd-bath
 
-blues
+#blues
 es/skywalker/
 es/sea_dreams/
 cb/seq/Blues_09
@@ -34,7 +34,7 @@ ocal/pastel-purple-blue
 occ/1/occ019
 occ/2/occ079
 
-topo
+#topo
 td/DEM_poster
 td/DEM_print
 td/DEM_screen
@@ -67,7 +67,7 @@ wkp/schwarzwald/wiki-schwarzwald-d050
 wkp/knutux/wiki-knutux
 wkp/tubs/nrwc
 
-topobath
+#topobath
 em/NZ_blue
 wkp/template/wiki-2.0
 wkp/country/wiki-scotland
@@ -89,14 +89,14 @@ wkp/encyclopedia/nordisk-familjebok
 mby/mby
 wkp/lilleskut/afrikakarte
 
-temp
+#temp
 oc/sst
 jjg/misc/temperature
 grass/celsius
 ukmo/wow/temp-c
 ncl/temp_19lev
 
-rain
+#rain
 grass/precipitation
 jjg/misc/rainfall
 mjf/departure
@@ -108,7 +108,7 @@ ukmo/wow/humidity
 ncl/precip_11lev
 wkp/precip/wiki-precip-mm
 
-greys
+#greys
 tl/
 erj/
 ma/gray/
@@ -129,7 +129,7 @@ tl/power-0.50
 go2/webtwo/grey-g2-3
 es/platinum/es_platinum_16
 
-reds
+#reds
 nd/red/
 es/rosa/
 cb/seq/Reds_09
@@ -159,7 +159,7 @@ ma/gray/grayscale08
 ma/gray/grayscale09
 rc/autumnrose
 
-div
+#div
 km/
 cb/div/
 jjg/cbcont/div/
@@ -208,7 +208,7 @@ km/blue-tan-d14
 km/cool-warm-d07
 km/green-purple
 
-transparency
+#transparency
 tl/
 ocal/
 ggr/
@@ -225,7 +225,7 @@ tl/power-0.80
 gps/GPS-Haze-and-Atmosphere
 gps/GPS-Simple-Smoke
 
-discord
+#discord
 rc/teabearrose
 pj/3/grand-old-flag
 pj/5/vampirelips
@@ -239,7 +239,7 @@ hult/gr41_hult
 ggr/Nauseating_Headache
 ds/rgi/rgi_15
 
-popular
+#popular
 ngdc/ETOPO1
 ibcao/ibcao
 wkp/template/wiki-2.0

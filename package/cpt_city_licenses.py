@@ -18,6 +18,7 @@ import sys, os, errno, urllib, warnings
 from xml.etree.ElementTree import ElementTree
 
 # definitions
+# gpl,gplv2,apache,ccnc,cc3,otherok,freeuse,other,none
 license_dict=dict()
 license_dict['gpl']=[]     #GPL
 license_dict['gplv2']=[]   #GPLv2
