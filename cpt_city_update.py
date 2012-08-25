@@ -27,13 +27,9 @@ Changelog:
  ***************************************************************************/
 """
 
-import sys, os, errno, urllib, warnings, zipfile, shutil
+import sys, os, errno, urllib2, warnings, zipfile, shutil
 import xml.etree.ElementTree as et
 from optparse import OptionParser
-
-#import qgis.core
-#from qgis.core import *
-#import qgis.utils
 
 ################################################################
 def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
@@ -72,27 +68,19 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
     # if this file is integrated into another package
     # called "foo" then please change the UA string to 
     # "cpt-city-update/foo"
-
     useragent = "cpt-city-update/qgis"
 
-    # these you probably leave alone
-
-    #pkgfile   = "package.xml"
-
     # handle verbose
-
     def info(args) :
         if verbose :
             print args
 
     # say hello
-
     info("This is cpt-city-update")
     info('cachedir: '+cachedir+' datadir: '+datadir+' verfile: '+verfile)
     info('starturl: '+starturl+' pkgfile: '+pkgfile)
 
     # ensure configuration/data dirs exist
-
     def ensure_directory(path) :
         try:
             os.makedirs(path)
@@ -107,27 +95,52 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
 
     # create customised urllib opener class with the
     # specified user agent string
+    opener = urllib2.build_opener()
+    opener.addheaders = [('User-agent', useragent)]
 
-    class Opener(urllib.FancyURLopener, object):
-        version = useragent
+    # opens a url and returns connection, or None if an error occured
+    def openurl(url):
+        info('fetching %s' % url)
+        try:
+            con = opener.open(url)
+        except urllib2.URLError, e:
+            print('error retrieving %s : %d' % (xmlurl,e.code))
+            return None
+        return con
 
-    opener = Opener()
+    # copies url to local path, returns False on error
+    def retrieveurl(url,path):
+        info('fetching %s to %s' % (url,path))
+        # get url
+        try:
+            con = opener.open(url)
+        except urllib2.URLError, e:
+            print('error retrieving %s : %d' % (url,e.code))
+            #print e.read()
+            return False
+    
+        #copy to file
+        try:
+            output = open(path,'wb')
+        except IOError as e:
+            print('error creating file %s : %s' % (path,e.strerror))
+            return False
+        output.write(con.read())
+        output.close()
+    
+        return True
 
     # try to open the package file
-
     xmlurl = "%s/%s" % (starturl,pkgfile)
-    url = urllib.urlopen(xmlurl)
-    if url.getcode() == 404:
-        print('invalid url %s' % xmlurl)
+    con = openurl(xmlurl)
+    if con is None:
         return (False,0)
 
-    con = opener.open(xmlurl)
-    assert con is not None, "Failed to connect to server"
-
     # get DOM from package file
-
     dom = et.parse(con).getroot()
-    assert dom is not None, "Failed to parse package file"
+    if dom is None:
+        print("Failed to parse package file")
+        return (False,0)        
 
     # check whether the url in the package file is the
     # same as the starturl, if now warn that an update
@@ -153,7 +166,6 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
         return parts
 
     # compare vernew and verold, if install=False then just notify new version
-
     def vernewer(a,b) :
         #return (a[0] > b[0]) or ((a[0] == b[0]) and (a[1] > b[1]))
         if a[0] > b[0]:
@@ -165,9 +177,6 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
         return False
         
     if os.path.exists(verfile) :
-        #fd = open(verfile,'r')
-        #verold = fd.readline().strip()
-
         tree = et.ElementTree('archive')
         tree.parse(verfile)
         if tree is None:
@@ -192,16 +201,16 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
             info("newer version available (%s > %s)" % (vernew,verold))
             if not install:
                 info("not installing as per user request")
-                return(True,vernew)                                   
+                return (True,vernew)                                   
         else:
             info("up to date (version %s) in %s" % (verold,datadir))
-            return(False,verold)                     
+            return (False,verold)                     
     else :
         info("initial version (%s)" % (vernew))           
             
     if not install:
         info("not installing as per user request")
-        return(True,vernew)                        
+        return (True,vernew)                        
 
     # get the files (if we don't have them already)
 
@@ -215,14 +224,9 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
         if os.path.exists(gradpath) :
             info("found %s" % (gradfile))
         else:
-            info("fetching %s" % (gradurl))
-            url = urllib.urlopen(gradurl)
-            if url.getcode() == 404:
-                print('invalid url %s' % gradurl)
-                return (False,0)
-            opener = Opener()
-            (filename,msg) = opener.retrieve(gradurl,gradpath)
-            info('got %s - %s' % (filename,msg))
+            if not retrieveurl(gradurl,gradpath):
+                return (False,vernew)
+
         # verify that the zipfile does not write any files
         # outside the directory into which is was unzipped
         #
@@ -270,44 +274,39 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
         os.makedirs(seldir)
 
     xmlurl = "%s/%s" % (starturl,selectionfile)
-    url = urllib.urlopen(xmlurl)
-    if url.getcode() == 404:
-        print('invalid url %s' % xmlurl)
+
+    # try to open the package file
+    con = openurl(xmlurl)
+    if con is None:
         return (False,0)
 
-    con = opener.open(xmlurl)
-    assert con is not None, "Failed to connect to server"
+    # get DOM from package file
     dom = et.parse(con).getroot()
-    assert dom is not None, "Failed to parse package file"
-    
+    if dom is None:
+        print("Failed to parse package file")
+        return (False,0)    
 
-    opener = Opener()
+    # get selection files
     for sel in dom.findall("selection"):
         selfileurl = "%s/../views/%s.xml" % (starturl,sel.text)
         selfile = "%s/%s.xml" % (seldir,sel.text)
-        info("fetching %s" % (selfileurl))
-        (filename,msg) = opener.retrieve(selfileurl,selfile)    
+        if not retrieveurl(selfileurl,selfile):
+            return (False,vernew)
 
     # get popular selections
     popfiles = [ "totp-svg", "totp-cpt" ]
     for sel in popfiles:
         selfileurl = "%s/../views/%s.xml" % (starturl,sel)
         selfile = "%s/%s.xml" % (seldir,sel)
-        info("fetching %s" % (selfileurl))
-        (filename,msg) = opener.retrieve(selfileurl,selfile)    
+        if not retrieveurl(selfileurl,selfile):
+            return (False,vernew)
     
 
-    # done
-
-    # save the new version number
-    #fd = open(verfile,'w')
-    #fd.write("%s\n" % (vernew))
-    #fd.close()
-
-    # say goodbye
+    # done - say goodbye
 
     info("done.")
-    return(True,vernew)                     
+
+    return (True,vernew)                     
 
 # end function cpt_city_update()
 ################################################################
