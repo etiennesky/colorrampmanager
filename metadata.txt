@@ -12,14 +12,16 @@
 name=Color Ramp Manager
 qgisMinimumVersion=1.9
 description=plugin to manage and download color ramp definitions
-version=0.2
+version=0.2.1
 
 # end of mandatory metadata
 
 # Optional items:
 
 # Uncomment the following line and add your changelog entries:
-changelog=support for new cpt-city metadata and qgis cpt-city packages
+changelog=
+ 0.2.1 : added selection package files to github, updated to latest cpt-city 2.0.6
+ 0.2   : support for new cpt-city metadata and qgis cpt-city packages
 
 # tags are comma separated with spaces allowed
 tags=style
