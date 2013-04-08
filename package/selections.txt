@@ -1,3 +1,5 @@
+# this selection updated for cpt-city 2.05
+#  ideally we should use the xml files from cpt-city website...
 
 #bath
 gmt/GMT_ocean
@@ -10,6 +12,8 @@ esri/hypsometry/bath/bath_111
 esri/hypsometry/bath/bath_112
 tp/tpsfhm
 xkcd/xkcd-bath
+wkp/lilleskut/afrikakarte-bath
+wkp/country/wiki-caucasus-bath
 
 #blues
 es/skywalker/
@@ -66,8 +70,10 @@ wkp/schwarzwald/wiki-schwarzwald-cont
 wkp/schwarzwald/wiki-schwarzwald-d050
 wkp/knutux/wiki-knutux
 wkp/tubs/nrwc
+wkp/jarke/pakistan
 
 #topobath
+ibcao/ibcao
 em/NZ_blue
 wkp/template/wiki-2.0
 wkp/country/wiki-scotland
@@ -81,13 +87,13 @@ grass/etopo2
 grass/srtm
 grass/terrain
 ngdc/ETOPO1
-ibcao/ibcao
 wkp/plumbago/wiki-plumbago
 ncl/topo_15lev
 wkp/encyclopedia/meyers
 wkp/encyclopedia/nordisk-familjebok
 mby/mby
 wkp/lilleskut/afrikakarte
+wkp/shadowxfox/colombia
 
 #temp
 oc/sst
@@ -106,6 +112,7 @@ wkp/ice/wiki-ice-greenland
 ukmo/wow/rain-mmh
 ukmo/wow/humidity
 ncl/precip_11lev
+ncl/precip2_17lev
 wkp/precip/wiki-precip-mm
 
 #greys
@@ -128,6 +135,7 @@ ocal/stripes-six
 tl/power-0.50
 go2/webtwo/grey-g2-3
 es/platinum/es_platinum_16
+neota/env/rock
 
 #reds
 nd/red/
@@ -158,6 +166,36 @@ jjg/neo10/food/red-candy
 ma/gray/grayscale08
 ma/gray/grayscale09
 rc/autumnrose
+
+#greens
+occ/1/occ040
+rc/girlcat
+saga/saga-08
+jjg/ccolo/evad/fava_bean
+jjg/ccolo/katiekat013/Lovely_Liz
+jjg/ccolo/laleh1979/contagious_delusion
+jjg/ccolo/phill/moldy_bread
+jjg/ccolo/smorin2002/All_kinds_of_green
+h5/summer
+gps/GPS-Nature-Grass
+go2/webtwo/green-g1-2
+es/emerald_dragon/es_emerald_dragon_12
+es/emerald_dragon/es_emerald_dragon_10
+cw/2/cw2-033
+colo/smorin2002/All_kinds_of_green
+colo/angelafaye/organic_vegetation
+colo/Skyblue2u/Adrift_in_Dreams
+ds9/he
+cb/seq/YlGn_09
+cb/seq/Greens_09
+cb/seq/BuGn_09
+ncl/WhiteGreen
+ncl/GreenYellow
+jjg/neo10/liht/frozen-in-time
+jjg/neo10/flor/tropical-green
+jjg/neo10/flor/apple-green
+jjg/neo10/faun/radioactive-slime
+jjg/neo10/env/green-crystal
 
 #div
 km/
@@ -210,6 +248,7 @@ km/green-purple
 
 #transparency
 tl/
+gps/
 ocal/
 ggr/
 es/platinum/es_platinum_01
@@ -239,6 +278,7 @@ hult/gr41_hult
 ggr/Nauseating_Headache
 ds/rgi/rgi_15
 
+# this should be updated from http://soliton.vm.bytemark.co.uk/pub/cpt-city/views/totp-cpt.xml
 #popular
 ngdc/ETOPO1
 ibcao/ibcao

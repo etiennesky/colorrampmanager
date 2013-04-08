@@ -222,6 +222,9 @@ if sel_file is None:
     for dist_dir in dist_dirs:
         shutil.copytree(idir+'/'+dist_dir,odir+'/'+dist_dir)
 
+# copy "selections" directory - these must be copied from cpt-city directory in qgis directory (downloaded by update script)
+shutil.copytree(idir+'/selections',odir+'/selections')
+
 # fix permissions: dirs are 755, files are 644
 for root, dirs, files in os.walk(odir):
     os.chmod(root,0755)
