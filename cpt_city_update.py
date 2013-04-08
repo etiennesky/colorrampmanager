@@ -58,9 +58,9 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
         selectionfile = "../views/index-static.xml"
     elif package == 'cpt-city-qgis-sel':
         #TODO change this before release!
-        starturl = "http://openclimgeo.org/cpt-city/pkg"
+        starturl = "https://github.com/etiennesky/colorrampmanager/tree/master/package"
         pkgfile   = "package-qgis-sel.xml"
-        selectionfile = "../views/index-static.xml"
+        selectionfile = "./index-static.xml"
     else:
         print('illegal value '+cpt-city+' for package argument')
         return
