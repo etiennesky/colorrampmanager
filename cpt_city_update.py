@@ -58,9 +58,9 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
         selectionfile = "../views/index-static.xml"
     elif package == 'cpt-city-qgis-sel':
         #TODO change this before release!
-        starturl = "https://raw.github.com/etiennesky/colorrampmanager/master/package"
+        starturl = "https://raw.github.com/etiennesky/colorrampmanager/master/pub/cpt-city/pkg"
         pkgfile   = "package-qgis-sel.xml"
-        selectionfile = "./index-static.xml"
+        selectionfile = "../views/index-static.xml"
     else:
         print('illegal value '+cpt-city+' for package argument')
         return

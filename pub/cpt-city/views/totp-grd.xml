@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selection cadence="high">
+  <name short="totp-grd">Top of the (grd) palettes</name>
+  <synopsis>The 75 most popular grd gradients 
+    on 23/08/2012</synopsis>
+  <description>
+    The 75 most popular grd files with the number downloaded 
+    shown in parentheses. The arrows indicate the change in rank in the last
+    month. This list is compiled from the files downloaded in the last year 
+    (a total of 777 files) and is updated irregularly, most recently on 
+    23/08/2012.
+  </description>
+  <gradients>
+
+    <gradient 
+       file="ETOPO1" 
+       dir="ngdc"  
+       rank="1"
+       direction="unchanged"
+       downloads="22"/>
+
+    <gradient 
+       file="ibcao" 
+       dir="ibcao"  
+       rank="2"
+       direction="unchanged"
+       downloads="9"/>
+
+    <gradient 
+       file="wiki-2.0" 
+       dir="wkp/template"  
+       rank="3"
+       direction="unchanged"
+       downloads="7"/>
+
+    <gradient 
+       file="DEM_print" 
+       dir="td"  
+       rank="3"
+       direction="unchanged"
+       downloads="7"/>
+
+    <gradient 
+       file="GMT_globe" 
+       dir="gmt"  
+       rank="5"
+       direction="down"
+       downloads="6"/>
+
+    <gradient 
+       file="DEM_screen" 
+       dir="td"  
+       rank="5"
+       direction="down"
+       downloads="6"/>
+
+    <gradient 
+       file="GMT_relief" 
+       dir="gmt"  
+       rank="5"
+       direction="up" 
+       downloads="6"/>
+
+    <gradient 
+       file="elevation" 
+       dir="grass"  
+       rank="5"
+       direction="down"
+       downloads="6"/>
+
+    <gradient 
+       file="rainbow" 
+       dir="oc"  
+       rank="9"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="es_seadreams_14" 
+       dir="es/sea_dreams"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="GMT_haxby" 
+       dir="gmt"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="humidity" 
+       dir="ukmo/wow"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="temperature" 
+       dir="jjg/misc"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="wiki-schwarzwald-d100" 
+       dir="wkp/schwarzwald"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="rain-mmh" 
+       dir="ukmo/wow"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="dkbluered" 
+       dir="h5"  
+       rank="10"
+       direction="up" 
+       downloads="4"/>
+
+    <gradient 
+       file="bcyr" 
+       dir="grass"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="wiki-ice-greenland" 
+       dir="wkp/ice"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="wiki-1.03" 
+       dir="wkp/template"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="GMT_panoply" 
+       dir="gmt"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="bhw1_01" 
+       dir="bhw/bhw1"  
+       rank="10"
+       direction="up" 
+       downloads="4"/>
+
+    <gradient 
+       file="wiki-schwarzwald-cont" 
+       dir="wkp/schwarzwald"  
+       rank="10"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="es_emerald_dragon_16" 
+       dir="es/emerald_dragon"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="iceland" 
+       dir="esri/hypsometry/eu"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="GMT_ocean" 
+       dir="gmt"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="cw1-006" 
+       dir="cw/1"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="b" 
+       dir="ds9"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="BlueDarkRed18" 
+       dir="ncl"  
+       rank="23"
+       direction="down"
+       downloads="3"/>
+
+    <gradient 
+       file="wiki-france" 
+       dir="wkp/country"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="es_emerald_dragon_08" 
+       dir="es/emerald_dragon"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="temp-c" 
+       dir="ukmo/wow"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="GMT_polar" 
+       dir="gmt"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="ETOPO1-Reed" 
+       dir="ngdc"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="DEM_poster" 
+       dir="td"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="cw1-013" 
+       dir="cw/1"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="nordisk-familjebok" 
+       dir="wkp/encyclopedia"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="nrwc" 
+       dir="wkp/tubs"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="es_emerald_dragon_28" 
+       dir="es/emerald_dragon"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="GMT_gebco" 
+       dir="gmt"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="es_rivendell_09" 
+       dir="es/rivendell"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="es_seadreams_03" 
+       dir="es/sea_dreams"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="terrain" 
+       dir="grass"  
+       rank="23"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="es_rivendell_14" 
+       dir="es/rivendell"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="Spectral_08" 
+       dir="cb/div"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="cw1-008" 
+       dir="cw/1"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="blue-tan-d09" 
+       dir="km"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="Abstract_1" 
+       dir="ggr"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="cw1-029" 
+       dir="cw/1"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_rivendell_12" 
+       dir="es/rivendell"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_emerald_dragon_14" 
+       dir="es/emerald_dragon"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="jet" 
+       dir="h5"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_seadreams_12" 
+       dir="es/sea_dreams"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_emerald_dragon_29" 
+       dir="es/emerald_dragon"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="wiki-galapagos" 
+       dir="wkp/country"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="cw1-027" 
+       dir="cw/1"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="blue-tan-d07" 
+       dir="km"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_rivendell_10" 
+       dir="es/rivendell"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_emerald_dragon_12" 
+       dir="es/emerald_dragon"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="cw1-004" 
+       dir="cw/1"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_seadreams_10" 
+       dir="es/sea_dreams"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_emerald_dragon_27" 
+       dir="es/emerald_dragon"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="RdBu_11" 
+       dir="cb/div"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="cw1-024" 
+       dir="cw/1"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="blue-tan-d05" 
+       dir="km"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="blue-yellow-d08" 
+       dir="km"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_rivendell_08" 
+       dir="es/rivendell"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_emerald_dragon_10" 
+       dir="es/emerald_dragon"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="xkcd-bath" 
+       dir="xkcd"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="afrikakarte-topo" 
+       dir="wkp/lilleskut"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_seadreams_08" 
+       dir="es/sea_dreams"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_emerald_dragon_25" 
+       dir="es/emerald_dragon"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="cw1-018" 
+       dir="cw/1"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="blue-yellow-d06" 
+       dir="km"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="es_rivendell_06" 
+       dir="es/rivendell"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+    <gradient 
+       file="srtm" 
+       dir="grass"  
+       rank="43"
+       direction="up" 
+       downloads="2"/>
+
+  </gradients>
+</selection>

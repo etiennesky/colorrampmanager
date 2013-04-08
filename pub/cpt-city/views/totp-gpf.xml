@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<selection cadence="high">
+  <name short="totp-gpf">Top of the (gpf) palettes</name>
+  <synopsis>The 75 most popular gpf gradients 
+    on 23/08/2012</synopsis>
+  <description>
+    The 75 most popular gpf files with the number downloaded 
+    shown in parentheses. The arrows indicate the change in rank in the last
+    month. This list is compiled from the files downloaded in the last year 
+    (a total of 1085 files) and is updated irregularly, most recently on 
+    23/08/2012.
+  </description>
+  <gradients>
+
+    <gradient 
+       file="b" 
+       dir="ds9"  
+       rank="1"
+       direction="unchanged"
+       downloads="20"/>
+
+    <gradient 
+       file="ETOPO1" 
+       dir="ngdc"  
+       rank="2"
+       direction="unchanged"
+       downloads="13"/>
+
+    <gradient 
+       file="sls" 
+       dir="ds9"  
+       rank="3"
+       direction="up" 
+       downloads="12"/>
+
+    <gradient 
+       file="rainbow" 
+       dir="oc"  
+       rank="3"
+       direction="down"
+       downloads="12"/>
+
+    <gradient 
+       file="wiki-schwarzwald-cont" 
+       dir="wkp/schwarzwald"  
+       rank="5"
+       direction="down"
+       downloads="10"/>
+
+    <gradient 
+       file="sst" 
+       dir="oc"  
+       rank="5"
+       direction="down"
+       downloads="10"/>
+
+    <gradient 
+       file="elevation" 
+       dir="grass"  
+       rank="7"
+       direction="up" 
+       downloads="9"/>
+
+    <gradient 
+       file="NZ_blue" 
+       dir="em"  
+       rank="7"
+       direction="unchanged"
+       downloads="9"/>
+
+    <gradient 
+       file="visspec" 
+       dir="jjg/physics"  
+       rank="9"
+       direction="down"
+       downloads="8"/>
+
+    <gradient 
+       file="GMT_ocean" 
+       dir="gmt"  
+       rank="9"
+       direction="down"
+       downloads="8"/>
+
+    <gradient 
+       file="RdYlBu" 
+       dir="jjg/polarity"  
+       rank="9"
+       direction="up" 
+       downloads="8"/>
+
+    <gradient 
+       file="temperature" 
+       dir="jjg/misc"  
+       rank="9"
+       direction="up" 
+       downloads="8"/>
+
+    <gradient 
+       file="earth" 
+       dir="gist"  
+       rank="13"
+       direction="up" 
+       downloads="7"/>
+
+    <gradient 
+       file="bb" 
+       dir="ds9"  
+       rank="13"
+       direction="up" 
+       downloads="7"/>
+
+    <gradient 
+       file="GMT_wysiwyg" 
+       dir="gmt"  
+       rank="13"
+       direction="up" 
+       downloads="7"/>
+
+    <gradient 
+       file="DEM_print" 
+       dir="td"  
+       rank="13"
+       direction="up" 
+       downloads="7"/>
+
+    <gradient 
+       file="bgyr" 
+       dir="grass"  
+       rank="13"
+       direction="up" 
+       downloads="7"/>
+
+    <gradient 
+       file="ibcao" 
+       dir="ibcao"  
+       rank="13"
+       direction="up" 
+       downloads="7"/>
+
+    <gradient 
+       file="rainbow" 
+       dir="ds9"  
+       rank="13"
+       direction="down"
+       downloads="7"/>
+
+    <gradient 
+       file="DEM_poster" 
+       dir="td"  
+       rank="13"
+       direction="up" 
+       downloads="7"/>
+
+    <gradient 
+       file="seminf-haxby" 
+       dir="jjg/misc"  
+       rank="21"
+       direction="down"
+       downloads="6"/>
+
+    <gradient 
+       file="DEM_screen" 
+       dir="td"  
+       rank="21"
+       direction="down"
+       downloads="6"/>
+
+    <gradient 
+       file="haxby" 
+       dir="grass"  
+       rank="21"
+       direction="down"
+       downloads="6"/>
+
+    <gradient 
+       file="heat" 
+       dir="ds9"  
+       rank="21"
+       direction="up" 
+       downloads="6"/>
+
+    <gradient 
+       file="bcyr" 
+       dir="grass"  
+       rank="21"
+       direction="down"
+       downloads="6"/>
+
+    <gradient 
+       file="GMT_relief" 
+       dir="gmt"  
+       rank="21"
+       direction="down"
+       downloads="6"/>
+
+    <gradient 
+       file="pm3d01" 
+       dir="pm"  
+       rank="21"
+       direction="down"
+       downloads="6"/>
+
+    <gradient 
+       file="bhw1_01" 
+       dir="bhw/bhw1"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="Paired_12" 
+       dir="cb/qual"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="bluered" 
+       dir="h5"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="differences" 
+       dir="grass"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="pm3d13" 
+       dir="pm"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="pm3d14" 
+       dir="pm"  
+       rank="28"
+       direction="up" 
+       downloads="5"/>
+
+    <gradient 
+       file="rainbow" 
+       dir="gist"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="jet" 
+       dir="h5"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="f-21-22-23" 
+       dir="pm"  
+       rank="28"
+       direction="up" 
+       downloads="5"/>
+
+    <gradient 
+       file="aips0" 
+       dir="ds9"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="pm3d05" 
+       dir="pm"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="wiki-france" 
+       dir="wkp/country"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="bhw2_whooo" 
+       dir="bhw/bhw2"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="cool" 
+       dir="ds9"  
+       rank="28"
+       direction="down"
+       downloads="5"/>
+
+    <gradient 
+       file="color" 
+       dir="ds9"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="wiki-schwarzwald-d100" 
+       dir="wkp/schwarzwald"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="GMT_no_green" 
+       dir="gmt"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="GMT_hot" 
+       dir="gmt"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="cool-warm" 
+       dir="km"  
+       rank="42"
+       direction="up" 
+       downloads="4"/>
+
+    <gradient 
+       file="njbath" 
+       dir="njgs"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="ncar" 
+       dir="gist"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="GMT_polar" 
+       dir="gmt"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="dkbluered" 
+       dir="h5"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="GMT_jet" 
+       dir="gmt"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="pm3d20" 
+       dir="pm"  
+       rank="42"
+       direction="up" 
+       downloads="4"/>
+
+    <gradient 
+       file="GMT_panoply" 
+       dir="gmt"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="GMT_globe" 
+       dir="gmt"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="Greys_09" 
+       dir="cb/seq"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="GMT_haxby" 
+       dir="gmt"  
+       rank="42"
+       direction="up" 
+       downloads="4"/>
+
+    <gradient 
+       file="a" 
+       dir="ds9"  
+       rank="42"
+       direction="up" 
+       downloads="4"/>
+
+    <gradient 
+       file="ch05m151010" 
+       dir="dg"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="pm3d08" 
+       dir="pm"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="grey" 
+       dir="ds9"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="saga-01" 
+       dir="saga"  
+       rank="42"
+       direction="down"
+       downloads="4"/>
+
+    <gradient 
+       file="wiki-2.0" 
+       dir="wkp/template"  
+       rank="42"
+       direction="up" 
+       downloads="4"/>
+
+    <gradient 
+       file="nordisk-familjebok" 
+       dir="wkp/encyclopedia"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="nrwc" 
+       dir="wkp/tubs"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="Spectral" 
+       dir="jjg/polarity"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="ch05m151410" 
+       dir="dg"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="humidity" 
+       dir="ukmo/wow"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="pm3d03" 
+       dir="pm"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="Skyline" 
+       dir="ggr"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="bhw1_w00t" 
+       dir="bhw/bhw1"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="bhw1_03" 
+       dir="bhw/bhw1"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="BlueDarkRed18" 
+       dir="ncl"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="he" 
+       dir="ds9"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="wiki-scotland" 
+       dir="wkp/country"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+    <gradient 
+       file="wiki-schwarzwald-d050" 
+       dir="wkp/schwarzwald"  
+       rank="63"
+       direction="up" 
+       downloads="3"/>
+
+  </gradients>
+</selection>
