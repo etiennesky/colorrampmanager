@@ -15,7 +15,7 @@ Changelog:
              * implement as a function and add datadir, install arguments
              * modification for running inside a qgis plugin (recommended) and as standalone
              * add version info to datadir/cpt-city/cpt-city-version) - would be nice to have inside the zip files
-             * save .zip file and install_dir in $HOME/.qgis/cache/cpt-city-update/
+             * save .zip file and install_dir in $HOME/.qgis2/cache/cpt-city-update/
 
 /***************************************************************************
  *                                                                         *
@@ -45,7 +45,7 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
     except NameError:
         qgisSettingsDir = None
     if qgisSettingsDir is None or qgisSettingsDir == '':
-        qgisSettingsDir = "%s/.qgis" % (os.environ['HOME'])
+        qgisSettingsDir = "%s/.qgis2" % (os.environ['HOME'])
     cachedir = "%s/cache/cpt-city" % (qgisSettingsDir)
     if datadir is None:
         datadir = "%s/" % (qgisSettingsDir)
