@@ -1,6 +1,11 @@
 # this selection updated for cpt-city 2.05
 #  ideally we should use the xml files from cpt-city website...
 
+
+#former qgis-min
+cb/
+grass/
+
 #bath
 gmt/GMT_ocean
 gmt/GMT_gebco
@@ -358,3 +363,4 @@ ds9/red
 cb/seq/OrRd_04
 jjg/dem/c3t3
 km/blue-yellow-d13
+

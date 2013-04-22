@@ -173,7 +173,9 @@ for sel_dir in sel_dirs:
                 print('match / '+sel_dir[:len(dist_dir)])
             if verbose:
                 print(sel_dir)
-            shutil.copytree(idir+'/'+sel_dir,odir+'/'+sel_dir)
+            #shutil.copytree(idir+'/'+sel_dir,odir+'/'+sel_dir)
+            os.system('mkdir -p '+odir+'/'+sel_dir)
+            os.system('cp -r '+idir+'/'+sel_dir+' '+odir+'/'+sel_dir)
             break
 
 # function to copy filename from idir/tmpdir to odir/tmpdir, recursively upward
@@ -220,10 +222,14 @@ for sel_file in sel_files:
 if sel_file is None:
     print('copying directories')
     for dist_dir in dist_dirs:
-        shutil.copytree(idir+'/'+dist_dir,odir+'/'+dist_dir)
+        #shutil.copytree(idir+'/'+dist_dir,odir+'/'+dist_dir)
+        os.system('mkdir -p '+odir+'/'+dist_dir)
+        os.system('cp -r '+idir+'/'+dist_dir+' '+odir+'/'+dist_dir)
 
 # copy "selections" directory - these must be copied from cpt-city directory in qgis directory (downloaded by update script)
-shutil.copytree(idir+'/selections',odir+'/selections')
+#shutil.copytree(idir+'/selections',odir+'/selections')
+os.system('mkdir -p '+odir+'/selections')
+os.system('cp -r '+idir+'/selections'+' '+odir+'/selections')
 
 # fix permissions: dirs are 755, files are 644
 for root, dirs, files in os.walk(odir):

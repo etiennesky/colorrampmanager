@@ -173,7 +173,7 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
         if len(a) == 2:
             return ((a[0] >= b[0]) and (a[1] > b[1]))
         if len(a) == 3:
-            return ((a[0] >= b[0]) and (a[1] >= b[1]) and (a[2] > b[2]))
+            return ((a[0] >= b[0]) and ( (a[1] > b[1]) or ( (a[1] >= b[1]) and (a[2] > b[2])) ) )
         return False
         
     if os.path.exists(verfile) :
