@@ -22,12 +22,13 @@
     <gradient file="srtm" dir="grass"/>
     <gradient file="terrain" dir="grass"/>
     <gradient file="ETOPO1" dir="ngdc"/>
-    <gradient file="ibcao" dir="ibcao"/>
+    <gradient file="ETOPO1-Reed" dir="ngdc"/>
     <gradient file="wiki-plumbago" dir="wkp/plumbago"/>
     <gradient file="topo_15lev" dir="ncl"/>
     <gradient file="meyers" dir="wkp/encyclopedia"/>
     <gradient file="nordisk-familjebok" dir="wkp/encyclopedia"/>
     <gradient file="mby" dir="mby"/>
     <gradient file="afrikakarte" dir="wkp/lilleskut"/>
+    <gradient file="colombia" dir="wkp/shadowxfox"/>
   </gradients>
 </selection>

@@ -56,5 +56,6 @@
     <gradient file="blue-tan-d14" dir="km"/>
     <gradient file="cool-warm-d07" dir="km"/>
     <gradient file="green-purple" dir="km"/>
+    <gradient file="gyr_centre" dir="imagej"/>
   </gradients>
 </selection>

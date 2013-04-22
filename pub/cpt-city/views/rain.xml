@@ -13,6 +13,7 @@
     <gradient file="rain-mmh" dir="ukmo/wow"/>
     <gradient file="humidity" dir="ukmo/wow"/>
     <gradient file="precip_11lev" dir="ncl"/>
+    <gradient file="precip2_17lev" dir="ncl"/>
     <gradient file="wiki-precip-mm" dir="wkp/precip"/>
   </gradients>
 </selection>

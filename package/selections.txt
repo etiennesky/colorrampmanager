@@ -14,6 +14,7 @@ tp/tpsfhm
 xkcd/xkcd-bath
 wkp/lilleskut/afrikakarte-bath
 wkp/country/wiki-caucasus-bath
+ibcso/ibcso
 
 #blues
 es/skywalker/
@@ -87,6 +88,7 @@ grass/etopo2
 grass/srtm
 grass/terrain
 ngdc/ETOPO1
+ngdc/ETOPO1-Reed
 wkp/plumbago/wiki-plumbago
 ncl/topo_15lev
 wkp/encyclopedia/meyers
@@ -245,6 +247,7 @@ ncl/BlWhRe
 km/blue-tan-d14
 km/cool-warm-d07
 km/green-purple
+gyr_centre/imagej
 
 #transparency
 tl/

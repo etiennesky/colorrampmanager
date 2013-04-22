@@ -41,5 +41,6 @@
     <gradient file="wiki-schwarzwald-d050" dir="wkp/schwarzwald"/>
     <gradient file="wiki-knutux" dir="wkp/knutux"/>
     <gradient file="nrwc" dir="wkp/tubs"/>
+    <gradient file="pakistan" dir="wkp/jarke"/>
   </gradients>
 </selection>
