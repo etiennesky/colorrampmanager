@@ -16,6 +16,19 @@ if len(sys.argv) != 4 and len(sys.argv) != 5:
     print('usage: cpt_city_mkdist idir odir version <sel_file>')
     sys.exit(1)
 
+# from http://stackoverflow.com/questions/1868714/how-do-i-copy-an-entire-directory-of-files-into-an-existing-directory-using-pyth
+def copytree(src, dst, symlinks=False, ignore=None):
+    if not os.path.exists(dst):
+        os.makedirs(dst)
+    for item in os.listdir(src):
+        s = os.path.join(src, item)
+        d = os.path.join(dst, item)
+        if os.path.isdir(s):
+            copytree(s, d, symlinks, ignore)
+        else:
+            if not os.path.exists(d) or os.stat(src).st_mtime - os.stat(dst).st_mtime > 1:
+                shutil.copy2(s, d)
+
 idir = sys.argv[1]
 odir = sys.argv[2]
 version = sys.argv[3]
@@ -174,8 +187,7 @@ for sel_dir in sel_dirs:
             if verbose:
                 print(sel_dir)
             #shutil.copytree(idir+'/'+sel_dir,odir+'/'+sel_dir)
-            os.system('mkdir -p '+odir+'/'+sel_dir)
-            os.system('cp -r '+idir+'/'+sel_dir+' '+odir+'/'+sel_dir)
+            copytree(idir+'/'+sel_dir,odir+'/'+sel_dir)
             break
 
 # function to copy filename from idir/tmpdir to odir/tmpdir, recursively upward
@@ -223,13 +235,11 @@ if sel_file is None:
     print('copying directories')
     for dist_dir in dist_dirs:
         #shutil.copytree(idir+'/'+dist_dir,odir+'/'+dist_dir)
-        os.system('mkdir -p '+odir+'/'+dist_dir)
-        os.system('cp -r '+idir+'/'+dist_dir+' '+odir+'/'+dist_dir)
+        copytree(idir+'/'+dist_dir,odir+'/'+dist_dir)
 
 # copy "selections" directory - these must be copied from cpt-city directory in qgis directory (downloaded by update script)
 #shutil.copytree(idir+'/selections',odir+'/selections')
-os.system('mkdir -p '+odir+'/selections')
-os.system('cp -r '+idir+'/selections'+' '+odir+'/selections')
+copytree(idir+'/selections',odir+'/selections')
 
 # fix permissions: dirs are 755, files are 644
 for root, dirs, files in os.walk(odir):
