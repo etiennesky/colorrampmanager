@@ -25,7 +25,7 @@ def name():
 def description():
     return "plugin to manage and download color ramp definitions"
 def version():
-    return "Version 0.2.1"
+    return "Version 0.2.2"
 def icon():
     return "icon.png"
 def qgisMinimumVersion():
