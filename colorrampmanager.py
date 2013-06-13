@@ -63,7 +63,7 @@ class ColorRampManager(QObject):
         self.plugin_dir = QFileInfo(QgsApplication.qgisUserDbFilePath()).path() + "/python/plugins/colorrampmanager"
         # initialize locale
         localePath = ""
-        locale = QSettings().value("locale/userLocale").toString()[0:2]
+        locale = QSettings().value("locale/userLocale",type=str)[0:2]
        
         if QFileInfo(self.plugin_dir).exists():
             localePath = self.plugin_dir + "/i18n/colorrampmanager_" + locale + ".qm"
@@ -113,8 +113,8 @@ class ColorRampManager(QObject):
             installDir = str(self.dlg.leDirCustom.text())
         if installDir is None or installDir=='':
             s = QSettings()
-            installDir = str(s.value('CptCity/baseDir', \
-                                         QgsApplication.pkgDataPath() + "/resources" ).toString())
+            installDir = s.value('CptCity/baseDir', \
+                                     QgsApplication.pkgDataPath() + "/resources", type=str)
         return installDir
     
     def getPackageType(self):
@@ -122,16 +122,20 @@ class ColorRampManager(QObject):
         packageType = str(self.dlg.packageType)
         if packageType is None or packageType=='':
             s = QSettings()
-            packageType = s.value('CptCity/archiveName', 'cpt-city-qgis-sel').toString()
+            packageType = s.value('CptCity/archiveName', 'cpt-city-qgis-min', type=str)
         return packageType
     
     def checkUpdateAuto(self):
+        packageType = self.getPackageType()
+        if packageType == 'cpt-city-qgis-min':
+            print('no need')
+            return ''
         #default check on start if last check was 7+ days ago
         s = QSettings()
-        daysCheck = s.value('CptCity/updateCheckAuto',0).toInt()[0]
+        daysCheck = s.value('CptCity/updateCheckAuto', 0, type=int)
         if daysCheck <= 0:
             return
-        prevCheckStr = str(s.value('CptCity/updateChecked', '').toString())
+        prevCheckStr = s.value('CptCity/updateChecked', '', type=str)
         check = False
         if prevCheckStr == '':
             check = True
@@ -155,26 +159,30 @@ class ColorRampManager(QObject):
         if installDir is None or installDir=='':
             installDir = self.getInstallDir()
 
+        packageType = self.getPackageType()
+        if packageType == 'cpt-city-qgis-min':
+            message = self.tr('no need to check for update for this package')
+            QMessageBox.information(None, self.dlg.windowTitle(), message, QMessageBox.Close)
+            return
         #message = self.checkPermissions(installDir,gui,title)
         #if message != '':
         #    return message
 
         # if we have an available update, no need to check
         s = QSettings()
-        if str(s.value('CptCity/updateAvailable', '').toString()) != '':
-            (ret,version) = (True,str(s.value('CptCity/updateAvailable', '').toString()))
+        if s.value('CptCity/updateAvailable', '', type=str) != '':
+            (ret,version) = (True,s.value('CptCity/updateAvailable', '', type=str))
         else:
             # set override cursor
             if gui:
                 QApplication.setOverrideCursor( Qt.WaitCursor )      
             # fetch new version
-            packageType = self.getPackageType()
             (ret,version) = cpt_city_update( installDir, False, packageType )
             if gui:
                 QApplication.restoreOverrideCursor()
             s = QSettings()
             # update settings
-            s.setValue('CptCity/updateChecked', QString(date.today().isoformat()))
+            s.setValue('CptCity/updateChecked', str(date.today().isoformat()))
             if ret:
                 s.setValue('CptCity/updateAvailable', str(version))
             
@@ -184,17 +192,17 @@ class ColorRampManager(QObject):
             #TODO print new version info and/or log, when not running from gui
             if gui:
                 result = QMessageBox.information(None, title, \
-                                                     self.tr('Version (%1) is available, download and install?').arg( version ), \
+                                                     self.tr('Version (%s) is available, download and install?') % ( str(version) ), \
                                                      QMessageBox.Yes | QMessageBox.No)
                 if result == QMessageBox.No:
                     return ''
                 else:
                     return self.installUpdate(installDir,gui,title)
             else:
-                return self.tr('New cpt-city version (%1) is available').arg( version )
+                return self.tr('New cpt-city version (%s) is available') % ( str(version) )
         elif version != 0:
             if gui:
-                QMessageBox.information(None, title, self.tr('Up to date (version %1)').arg(version), QMessageBox.Close)
+                QMessageBox.information(None, title, self.tr('Up to date (version %s)') % (str(version)), QMessageBox.Close)
                 self.dlg.pbtnUpdateCheck.setEnabled( False )
             else:
                 return ''
@@ -222,9 +230,9 @@ class ColorRampManager(QObject):
             QApplication.restoreOverrideCursor()
         if ret:       
             s = QSettings()
-            s.setValue('CptCity/updateChecked', QString(date.today().isoformat()))
-            s.setValue('CptCity/updateAvailable', QString(''))
-            message = self.tr('Version %1 installed').arg(version)
+            s.setValue('CptCity/updateChecked', str(date.today().isoformat()))
+            s.setValue('CptCity/updateAvailable', '')
+            message = self.tr('Version %s installed') % (str(version))
             if gui:
                 QMessageBox.information(None, self.dlg.windowTitle(), message, QMessageBox.Close)
                 self.dlg.pbtnUpdateCheck.setEnabled( False )
@@ -243,7 +251,7 @@ class ColorRampManager(QObject):
                 QMessageBox.warning(None, title, message, QMessageBox.Close)
             return message
         if not os.access(installDir, os.W_OK):
-            message = self.tr('Cannot write to directory %1').arg(installDir)
+            message = self.tr('Cannot write to directory %s') % (installDir)
             if gui:
                 QMessageBox.warning(None, title, message, QMessageBox.Close)
             return message

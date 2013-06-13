@@ -39,8 +39,8 @@ class ColorRampManagerDialog(QDialog, Ui_ColorRampManager):
         self.setupUi(self)
         #self.updateUi()
 
-        self.installDir = QString() #here a QString
-        self.packageType = QString()
+        self.installDir = ''
+        self.packageType = ''
         self.checkUpdateAuto = QtCore.pyqtSignal() 
         self.connect(self, SIGNAL("checkUpdate"),
                      self.pbtnUpdateCheck, SIGNAL('clicked()'))
@@ -54,8 +54,8 @@ class ColorRampManagerDialog(QDialog, Ui_ColorRampManager):
         # set dir. labels
         s = QSettings()
         self.installDir = s.value('CptCity/baseDir', \
-                                      QgsApplication.pkgDataPath() + "/resources/" ).toString()
-        print('got installdir='+str(self.installDir))
+                                      QgsApplication.pkgDataPath() + "/resources/", type=str )
+        print('got installdir= '+self.installDir)
         self.lblDirQgis.setText(QgsApplication.pkgDataPath() + "/resources/")
         if not os.access(self.lblDirQgis.text(), os.W_OK):
             if self.installDir == QgsApplication.pkgDataPath() + "/resources/":
@@ -65,10 +65,10 @@ class ColorRampManagerDialog(QDialog, Ui_ColorRampManager):
         self.lblDirUser.setText(QgsApplication.qgisSettingsDirPath())
         #self.leDirCustom.setText('')
 
-        print('got installdir='+str(self.installDir))
+        print('got installdir= '+self.installDir)
         # package type
-        self.packageType = s.value('CptCity/archiveName', 'cpt-city-qgis-min').toString()
-        print(str(self.packageType))
+        self.packageType = s.value('CptCity/archiveName', 'cpt-city-qgis-min', type=str)
+        print(self.packageType)
         if str(self.packageType) == 'cpt-city':
             self.rbtnPackageCptCity.setChecked( True )
         elif str(self.packageType) == 'cpt-city-qgis-sel':
@@ -81,7 +81,7 @@ class ColorRampManagerDialog(QDialog, Ui_ColorRampManager):
 
         # set which dir is selected, default is in qgis user dir
  
-        print('got installdir='+str(self.installDir))
+        print('got installdir= '+self.installDir)
         if self.installDir == self.lblDirQgis.text():
             self.rbtnDirQgis.setChecked( True )
         elif self.installDir == self.lblDirUser.text():
@@ -95,7 +95,7 @@ class ColorRampManagerDialog(QDialog, Ui_ColorRampManager):
             self.rbtnDirUser.setChecked( True )
             #self.installDir = QgsApplication.qgisSettingsDirPath()
         else:
-            if str(self.packageType) == 'cpt-city-qgis-min' and self.rbtnDirQgis.isEnabled():
+            if self.packageType == 'cpt-city-qgis-min' and self.rbtnDirQgis.isEnabled():
                 self.rbtnDirQgis.setChecked( True )
             else:
                 self.rbtnDirUser.setChecked( True )
@@ -115,9 +115,9 @@ class ColorRampManagerDialog(QDialog, Ui_ColorRampManager):
             s.remove('CptCity/archiveName')
             s.setValue('CptCity/updateCheckAuto', 0)
         else:
-            if str(self.installDir) != '':
+            if self.installDir != '':
                 s.setValue('CptCity/baseDir', self.installDir)
-            if str(self.packageType) != '':
+            if self.packageType != '':
                 s.setValue('CptCity/archiveName', self.packageType)
             if self.cboxCheckUpdateAuto.isChecked():
                 checkAuto=7
@@ -178,6 +178,6 @@ class ColorRampManagerDialog(QDialog, Ui_ColorRampManager):
         QDialog.show(self)
         # if we have an available update, go fetch it
         s = QSettings()
-        if str(s.value('CptCity/updateAvailable', '').toString()) != '':
+        if s.value('CptCity/updateAvailable', '', type=str) != '':
             self.emit(SIGNAL('checkUpdate'))
 

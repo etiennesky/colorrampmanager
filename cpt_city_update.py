@@ -62,7 +62,7 @@ def cpt_city_update( datadir = None, install = True, package = 'cpt-city' ):
         pkgfile   = "package-qgis-sel.xml"
         selectionfile = "../views/index-static.xml"
     else:
-        print('illegal value '+cpt-city+' for package argument')
+        print('illegal value '+package+' for package argument')
         return
 
     # if this file is integrated into another package

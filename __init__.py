@@ -20,16 +20,7 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
-def name():
-    return "Color Ramp Manager"
-def description():
-    return "plugin to manage and download color ramp definitions"
-def version():
-    return "Version 0.2.2"
-def icon():
-    return "icon.png"
-def qgisMinimumVersion():
-    return "1.9"
+
 def classFactory(iface):
     # load ColorRampManager class from file ColorRampManager
     from colorrampmanager import ColorRampManager
