@@ -8,13 +8,23 @@ to make a file with free-to-use selections:
 to make a file with free-to-use files from entire dataset:
 ./cpt_city_mkdist.py cpt-city cpt-city-qgis-full 2.02.1
 
-to prepare new input files
-1) unzip $HOME/.qgis2/cache/cpt-city/cpt-city-svg-2.xx.zip
-2) cp -rv $HOME/.qgis2/cpt-city/selections/ .
+to prepare new input files:
 
-3) cd cpt-city && ../cpt_city_licenses.py
+1) $ unzip $HOME/.qgis2/cache/cpt-city/cpt-city-svg-2.xx.zip
+2) $ cp -rv $HOME/.qgis2/cpt-city/selections/ .
+
+3) $ cd cpt-city && ../cpt_city_licenses.py
 look for any new entries in the "unsure" category, verify the licences in those dirs. (in COPYING.xml file) 
 and update cpt_city_licenses.py accordingly (i.e. add to one of the licenses_dist_* arrays)
+
+to make new package:
+
+4) $ ./cpt_city_mkdist.py cpt-city cpt-city-qgis-sel 2.09.1 selections.txt
+
+5) $ cp -f $HOME/.qgis2/cpt-city/selections/* pub/cpt-city/views/
+
+6) commit new zip file and selection files, push to github
+
 '''
 
 import sys, os, errno, urllib, warnings, zipfile, shutil, string, time, subprocess
