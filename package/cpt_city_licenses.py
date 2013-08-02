@@ -42,7 +42,7 @@ licenses_dist_yes=[ 'gpl', 'gplv2', 'apache', 'cc3', 'otherok' ]
 licenses_dist_no=[ 'freeuse', 'none' ]
 licenses_dist_unsure=[ 'other' ]
 licenses_dist_noncomm=[ 'ccnc' ]
-licenses_dist_force_yes=[ 'jm', 'fg', 'rf', 'wkp/ice', 'dg', 'es', 'gery', 'ncl', 'os', 'ukmo', 'wkp/encyclopedia', 'go2/button', 'go2/ipod', 'go2/webtwo', 'ds', 'esdb' ]
+licenses_dist_force_yes=[ 'jm', 'fg', 'rf', 'wkp/ice', 'dg', 'es', 'gery', 'ncl', 'os', 'ukmo', 'wkp/encyclopedia', 'go2/button', 'go2/ipod', 'go2/webtwo', 'ds', 'esdb', 'fractint' ]
 licenses_dist_force_no=[ 'njgs', 'esri' ]
 
 """
